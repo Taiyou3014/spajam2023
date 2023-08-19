@@ -35,8 +35,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+<<<<<<< HEAD
   sensors: ^2.0.3
   firebase_core: ^2.15.1
+=======
+  firebase_core: ^2.15.0
+  vibration: ^1.8.1
+  flutter_dotenv: ^5.1.0
+  hooks_riverpod: ^2.3.8
+  riverpod_annotation: ^2.1.2
+  flutter_hooks: ^0.20.0
+  dart_openai: ^4.0.0
+>>>>>>> e1611db6dd7d8e1fc78675a3ca89a4397ce8a16e
 
 dev_dependencies:
   flutter_test:
@@ -54,14 +64,23 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+<<<<<<< HEAD
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
+=======
+  fonts:
+    - family: azuki
+      fonts:
+        - asset: assets/fonts/azuki.ttf
+
+>>>>>>> e1611db6dd7d8e1fc78675a3ca89a4397ce8a16e
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - .env
     - assets/images/water.jpg
     - assets/images/seikai.png
     - assets/images/fuseikai.png

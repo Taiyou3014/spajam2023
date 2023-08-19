@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/make_question.dart';
 import 'package:sensors/sensors.dart';
 import 'ans.dart';
 import 'dart:math';
@@ -24,6 +25,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   final Prefecture_hight = 150.0;
 
   var prefecture_list = _shuffle([0, 1, 2, 3, 4]);
+  late Future<String> question;
 
   double x = 0;
   double y = 0;
@@ -48,7 +50,10 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    var num_ans = _shuffle([0, 1, 2]);
+    var num_ans = _shuffle([0, 1, 2])[0];
+    super.initState();
+    question = makeQuestion(imageWidgets[num_ans].name);
+
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
     controller.addStatusListener((status) {
@@ -148,11 +153,63 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                   width: double.infinity,
                   height: double.infinity,
                 ),
-                Text('問題文'),
+                FutureBuilder<String>(
+                  future: question,
+                  builder:
+                      (BuildContext context, AsyncSnapshot<String> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+                      // テキストの位置とスタイルを変更
+                      return Positioned(
+                        top: MediaQuery.of(context).size.height *
+                            0.1, // 画面の上部1/20の位置に配置
+                        left: 20.0, // テキストの左側の余白を20.0に設定
+                        right: 20.0, // テキストの右側の余白を20.0に設定
+
+                        child: Column(
+                          children: [
+                            // ここに新しく追加するテキスト
+                            Text(
+                              'この都道府県にポインタを合わせろ！',
+                              style: TextStyle(
+                                fontSize: 30.0, // 任意のサイズに調整可能
+                                fontWeight: FontWeight.w600, // 任意の太さに調整可能
+                                color: Colors.black, // 色は赤に設定（任意の色に調整可能）
+                                // fontFamily: 'あなたの希望のフォント名', // 必要に応じてフォントを設定
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 10.0), // この部分でテキスト間のスペースを調整
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              color: Colors.white,
+                              child: Text(
+                                snapshot.data!,
+                                style: const TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 7, 82, 144),
+                                  fontFamily: 'azuki',
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return Center(
+                          child:
+                              const CircularProgressIndicator()); // or another widget to show loading
+                    }
+                  },
+                ),
 
                 // 1つ目の県
                 Positioned(
-                  top: 100.0,
+                  top: 500.0,
                   left: 50.0 + positionedAnimation.value,
                   width: Prefecture_width,
                   height: Prefecture_hight,
@@ -172,8 +229,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                 ),
                 // 2つ目の県
                 Positioned(
-                  top: 250.0,
-                  left: 200.0 + positionedAnimation.value,
+                  top: 450.0,
+                  left: 250.0 + positionedAnimation.value,
                   width: Prefecture_width,
                   height: Prefecture_hight,
                   child: Transform.rotate(
@@ -192,8 +249,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                 ),
                 // 3つ目の県
                 Positioned(
-                  top: 500.0,
-                  left: 100.0 + positionedAnimation.value,
+                  top: 300.0,
+                  left: 50.0 + positionedAnimation.value,
                   width: Prefecture_width,
                   height: Prefecture_hight,
                   child: Transform.rotate(
