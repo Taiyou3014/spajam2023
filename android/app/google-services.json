@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "673907129441",
+    "project_id": "fir-test-caefe",
+    "storage_bucket": "fir-test-caefe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673907129441:android:58ae2d75d6e3f2d2c07e20",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673907129441-0nbc4d92vuhoe2vjko7jofnjmj1j0j53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF_RDXe1kY_557W6fQDHJcilcZ2CZY3Oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673907129441-0nbc4d92vuhoe2vjko7jofnjmj1j0j53.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "673907129441-1piru15k6tfqdv2tm3phl6hei1vuvbp9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApplication2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
