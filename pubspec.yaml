@@ -15,6 +15,11 @@ dependencies:
   firebase_core: ^2.15.0
   vibration: ^1.8.1
   google_fonts: ^5.1.0
+  flutter_dotenv: ^5.1.0
+  hooks_riverpod: ^2.3.8
+  riverpod_annotation: ^2.1.2
+  flutter_hooks: ^0.20.0
+  dart_openai: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +42,9 @@ flutter:
     - assets/images/fuseikai.png
     - assets/images/icon.png
     - assets/images/hit.png
+
+    - assets/images/prefectures/fukuoka.png
+    - assets/images/prefectures/kagoshima.png
+    - assets/images/prefectures/kumamoto.png
+    - assets/images/prefectures/miyazaki.png
+    - assets/images/prefectures/nagasaki.png

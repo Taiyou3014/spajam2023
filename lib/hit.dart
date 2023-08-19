@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'ans.dart';
 
 class Hit extends StatefulWidget {
-  final String s; // 引数として受け取る
-  Hit({required this.s});
+  final String path; // 引数として受け取る
+  final String name;
+
+  Hit({required this.path, required this.name});
 
   @override
-  _Hit createState() => _Hit(s: s);
+  _Hit createState() => _Hit(path: path, name: name);
 }
 
 class _Hit extends State<Hit> {
-  final String s;
+  final String path;
+  final String name;
 
-  _Hit({required this.s});
+  _Hit({required this.path, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +26,24 @@ class _Hit extends State<Hit> {
         child: Column(
           children: [
             SizedBox(height: _size.height * 0.25),
-            Image.asset(s),
+            Image.asset('assets/images/hit.png'),
             SizedBox(
               width: 200,
               height: 70,
+            ),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(path),
+                Text(
+                  name,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      decoration: TextDecoration.none),
+                ),
+              ],
             ),
             ElevatedButton(
               onPressed: () {
