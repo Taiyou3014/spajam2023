@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'ans.dart';
 
 // Scoop(掬う) 都道府県を掬う画面
 class Scoop extends StatelessWidget {
   const Scoop({Key? key}) : super(key: key);
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Scoop")),
@@ -19,9 +20,18 @@ class Scoop extends StatelessWidget {
           const Center(
             child: Text("You are now on the next screen"),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MoneyAnimation(flag: false)),
+              );
+            },
+            child: const Text("next"),
+          ),
         ],
       ),
     );
   }
-
 }
