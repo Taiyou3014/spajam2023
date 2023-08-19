@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:sensors/sensors.dart';
 import 'ans.dart';
@@ -27,7 +28,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double x = 0;
   double y = 0;
   double z = 0;
-  double? _deviceWidth, _deviceHeight;
+  double? _deviceWidth,_deviceHeight;
   double? _circle_x, _circle_y;
 
   bool hit = false;
@@ -68,10 +69,31 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
         x -= event.x*8;
         y -= event.y*8;
         z -= event.z;
-        print(event.y);
+        // print(event.y);
       });
     });
+    if(_circle_x != null && _circle_y != null){
+      if(_circle_x! > 155 && _circle_x! < 195 && _circle_y! > 130 && _circle_y! <170){
+        hit = true;
+      }
+      else if(_circle_x! > 305 && _circle_x! <345 && _circle_y! > 255 && _circle_y! < 295){
+        hit = true;
+      }
+      else if(_circle_x! > 555 && _circle_x! < 595 && _circle_y! > 155 && _circle_y! < 195){
+        hit = true;
+      }
+    }
+    print(_circle_x);
+    
   }
+
+  // void circleCenter(){
+  //   setState(() {
+  //     _circle_x! + x;
+  //     _circle_y! - y;
+  //     print(_circle_x);
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -83,8 +105,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
-    _circle_x = MediaQuery.of(context).size.width / 2;
-    _circle_y = MediaQuery.of(context).size.height / 2;
+    _circle_x = MediaQuery.of(context).size.width / 2 + 25;
+    _circle_y = MediaQuery.of(context).size.height / 2 + 25;
     if(!hit){
       return Scaffold(
       appBar: AppBar(title: const Text("Scoop")),
@@ -162,9 +184,9 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                 ),
               ),
               Positioned(
-                left: _circle_x! + x,
-                top: _circle_y! - y,
-                child: Icon(Icons.circle, size: 50.0),
+                top: _circle_x ! + x,
+                left: _circle_y! - y,
+                child: Icon(Icons.circle,size:50.0),
               ),
             ],
           );
@@ -172,7 +194,42 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
       ),
     );
     }
-    
+    else{
+      return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter app'),
+      ),
+      body: AnimatedBuilder(
+        animation: controller,
+        builder: (context, _) {
+          return Stack(
+            children: <Widget>[
+              Positioned(
+                top: 50.0,
+                left: 50.0,
+                width: 100.0,
+                height: 100.0,
+                child: Transform.rotate(
+                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                  child: Container(height: 100, width: 100, color: Colors.blue),
+                ),
+              ),
+              Positioned(
+                top: 200.0,
+                left: 200.0,
+                width: 100.0,
+                height: 100.0,
+                child: Transform.rotate(
+                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                  child: Container(height: 100, width: 100, color: Colors.blue),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+    }
   }
 }
 
