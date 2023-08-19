@@ -28,7 +28,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double x = 0;
   double y = 0;
   double z = 0;
-  double? _deviceWidth,_deviceHeight;
+  double? _deviceWidth, _deviceHeight;
   double? _circle_x, _circle_y;
 
   bool hit = false;
@@ -105,8 +105,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
-    _circle_x = MediaQuery.of(context).size.width / 2 + 25;
-    _circle_y = MediaQuery.of(context).size.height / 2 + 25;
+    _circle_x = MediaQuery.of(context).size.width / 2;
+    _circle_y = MediaQuery.of(context).size.height / 2;
     if(!hit){
       return Scaffold(
       appBar: AppBar(title: const Text("Scoop")),
@@ -184,9 +184,9 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                 ),
               ),
               Positioned(
-                top: _circle_x ! + x,
-                left: _circle_y! - y,
-                child: Icon(Icons.circle,size:50.0),
+                left: _circle_x! + x,
+                top:  _circle_y! - y,
+                child: Icon(Icons.circle, size: 50.0),
               ),
             ],
           );
