@@ -16,9 +16,6 @@ class _MyHomePageState extends State<MyHomePage>
   late Animation<double> rotateAnimation; // <<< 2つ目のアニメーション
   late Animation<double> positionedAnimation;
 
-  var x = 0;
-  var y = 0;
-
   @override
   void initState() {
     controller =
@@ -64,7 +61,17 @@ class _MyHomePageState extends State<MyHomePage>
                   angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
                   child: Container(height: 100, width: 100, color: Colors.blue),
                 ),
-              )
+              ),
+              Positioned(
+                top: 200.0,
+                left: 200.0 + positionedAnimation.value,
+                width: 100.0,
+                height: 100.0,
+                child: Transform.rotate(
+                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                  child: Container(height: 100, width: 100, color: Colors.blue),
+                ),
+              ),
             ],
           );
         },
