@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
+
+void vibrateDevice(){
+  Vibration.vibrate(); // デフォルトの振動を実行 duration:1000とかすれば振動の長さを変更可能
+}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,11 +14,17 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Home', style: TextStyle(color: Colors.black)),
+        title: const Text('Home', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
       ),
-      body: Column(
-        children: [Text('test')],
+      body: const Column(
+        children: [
+          Text('test'),
+          ElevatedButton(
+            onPressed: vibrateDevice,
+            child: Text("Vibrate"),
+          )
+        ]
       ),
     );
   }
