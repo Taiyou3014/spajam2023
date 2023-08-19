@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'ans.dart';
+import 'hit.dart';
 
 // Scoop(掬う) 都道府県を掬う画面
 class Scoop extends StatelessWidget {
@@ -25,7 +25,7 @@ class Scoop extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => MoneyAnimation(flag: false)),
+                    builder: (context) => Hit(s: 'assets/images/hit.png')),
               );
             },
             child: const Text("next"),

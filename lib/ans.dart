@@ -106,33 +106,34 @@ class _MoneyAnimationState extends State<MoneyAnimation>
                       height: 200, // 画像の高さを指定
                     ),
                   if (flag == true)
-                    Text(
+                    /*Text(
                       "正解!\nあなたは地方を救いました!",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: const Color.fromARGB(255, 255, 255, 255),
                           decoration: TextDecoration.none),
-                    ),
-                  SizedBox(height: 10),
+                    ),*/
+                    SizedBox(height: 10),
                   if (flag == false)
                     Image.asset(
                       'assets/images/fuseikai.png', // 画像ファイルのパスを指定
                       height: 200, // 画像の高さを指定
                     ),
                   if (flag == false)
-                    Text(
+                    /*Text(
                       "不正解!\n財政破綻!!",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: const Color.fromARGB(255, 255, 255, 255),
                           decoration: TextDecoration.none),
-                    ),
-                  SizedBox(height: 10),
+                    ),*/
+                    SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pop(context); // ダイアログを閉じる
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue, // ボタンの背景色を青色に設定

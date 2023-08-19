@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/scoop.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(const MyApp());
 
@@ -20,20 +21,37 @@ class Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 50.0),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Scoop()),
-              );
-            },
-            child: const Text("Start"),
-          ),
+    var _size = MediaQuery.of(context).size;
+    return Container(
+      color: Color.fromARGB(255, 165, 252, 226),
+      child: Expanded(
+        child: Column(
+          children: [
+            SizedBox(height: _size.height * 0.25),
+            Text(
+              '地方すくいず',
+              style: GoogleFonts.darumadropOne(
+                  textStyle: Theme.of(context).textTheme.displayLarge,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 23, 111, 212),
+                  decoration: TextDecoration.none),
+            ),
+            Image.asset('assets/images/icon.png'),
+            SizedBox(
+              width: 200,
+              height: 70,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Scoop()),
+                  );
+                },
+                child: const Text("Start", style: TextStyle(fontSize: 30)),
+              ),
+            ),
+          ],
         ),
       ),
     );
