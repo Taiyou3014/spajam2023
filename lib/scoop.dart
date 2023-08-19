@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:sensors/sensors.dart';
 import 'ans.dart';
 import 'dart:math';
 import 'prefecture.dart';
+import 'get.dart';
 
 // Scoop(掬う) 都道府県を掬う画面
 class Scoop extends StatefulWidget {
@@ -32,6 +32,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double? _circle_x, _circle_y;
 
   bool hit = false;
+  var encount_num = 0;
 
   List<Prefecture> imageWidgets = [
     Prefecture(image_path: 'assets/images/prefectures/fukuoka.png', name: '福岡'),
@@ -66,25 +67,31 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     controller.forward();
     accelerometerEvents.listen((AccelerometerEvent event) {
       setState(() {
-        x -= event.x*8;
-        y -= event.y*8;
+        x -= event.x * 8;
+        y -= event.y * 8;
         z -= event.z;
         // print(event.y);
       });
     });
-    if(_circle_x != null && _circle_y != null){
-      if(_circle_x! > 155 && _circle_x! < 195 && _circle_y! > 130 && _circle_y! <170){
+    if (_circle_x != null && _circle_y != null) {
+      if (_circle_x! > 155 &&
+          _circle_x! < 195 &&
+          _circle_y! > 130 &&
+          _circle_y! < 170) {
         hit = true;
-      }
-      else if(_circle_x! > 305 && _circle_x! <345 && _circle_y! > 255 && _circle_y! < 295){
+      } else if (_circle_x! > 305 &&
+          _circle_x! < 345 &&
+          _circle_y! > 255 &&
+          _circle_y! < 295) {
         hit = true;
-      }
-      else if(_circle_x! > 555 && _circle_x! < 595 && _circle_y! > 155 && _circle_y! < 195){
+      } else if (_circle_x! > 555 &&
+          _circle_x! < 595 &&
+          _circle_y! > 155 &&
+          _circle_y! < 195) {
         hit = true;
       }
     }
     print(_circle_x);
-    
   }
 
   // void circleCenter(){
@@ -106,140 +113,117 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     _circle_x = MediaQuery.of(context).size.width / 2 + x + 25;
-    _circle_y = MediaQuery.of(context).size.height / 2 -y + 25;
-    if(_circle_y! > 155 && _circle_y! < 195 && _circle_x! > 130 && _circle_x! <170){
-        hit = true;
-      }
-      else if(_circle_y! > 305 && _circle_y! <345 && _circle_x! > 255 && _circle_x! < 295){
-        hit = true;
-      }
-      else if(_circle_y! > 555 && _circle_y! < 595 && _circle_x! > 155 && _circle_x! < 195){
-        hit = true;
-      }
-      print(_circle_x);
-    if(!hit){
-      return Scaffold(
-      appBar: AppBar(title: const Text("Scoop")),
-      body: AnimatedBuilder(
-        animation: controller,
-        builder: (context, _) {
-          return Stack(
-            children: <Widget>[
-              Image.asset(
-                'assets/images/water.jpg',
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              Text('問題文'),
-
-              // 1つ目の県
-              Positioned(
-                top: 100.0,
-                left: 50.0 + positionedAnimation.value,
-                width: Prefecture_width,
-                height: Prefecture_hight,
-                child: Transform.rotate(
-                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        imageWidgets[prefecture_list[0]].image_path,
-                        fit: BoxFit.cover,
-                      ),
-                      Text(imageWidgets[prefecture_list[0]].name),
-                    ],
-                  ),
-                ),
-              ),
-              // 2つ目の県
-              Positioned(
-                top: 250.0,
-                left: 200.0 + positionedAnimation.value,
-                width: Prefecture_width,
-                height: Prefecture_hight,
-                child: Transform.rotate(
-                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        imageWidgets[prefecture_list[1]].image_path,
-                        fit: BoxFit.cover,
-                      ),
-                      Text(imageWidgets[prefecture_list[1]].name),
-                    ],
-                  ),
-                ),
-              ),
-              // 3つ目の県
-              Positioned(
-                top: 500.0,
-                left: 100.0 + positionedAnimation.value,
-                width: Prefecture_width,
-                height: Prefecture_hight,
-                child: Transform.rotate(
-                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        imageWidgets[prefecture_list[2]].image_path,
-                        fit: BoxFit.cover,
-                      ),
-                      Text(imageWidgets[prefecture_list[2]].name),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                left: _circle_x! ,
-                top:  _circle_y! ,
-                child: Icon(Icons.circle, size: 50.0),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-    
+    _circle_y = MediaQuery.of(context).size.height / 2 - y + 25;
+    if (_circle_y! > 155 &&
+        _circle_y! < 195 &&
+        _circle_x! > 130 &&
+        _circle_x! < 170) {
+      hit = true;
+      encount_num = 0;
+    } else if (_circle_y! > 305 &&
+        _circle_y! < 345 &&
+        _circle_x! > 255 &&
+        _circle_x! < 295) {
+      hit = true;
+      encount_num = 1;
+    } else if (_circle_y! > 555 &&
+        _circle_y! < 595 &&
+        _circle_x! > 155 &&
+        _circle_x! < 195) {
+      hit = true;
+      encount_num = 2;
     }
-    else{
+    print(_circle_x);
+    if (!hit) {
       return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter app'),
-      ),
-      body: AnimatedBuilder(
-        animation: controller,
-        builder: (context, _) {
-          return Stack(
-            children: <Widget>[
-              Positioned(
-                top: 50.0,
-                left: 50.0,
-                width: 100.0,
-                height: 100.0,
-                child: Transform.rotate(
-                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Container(height: 100, width: 100, color: Colors.blue),
+        appBar: AppBar(title: const Text("Scoop")),
+        body: AnimatedBuilder(
+          animation: controller,
+          builder: (context, _) {
+            return Stack(
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/water.jpg',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
-              ),
-              Positioned(
-                top: 200.0,
-                left: 200.0,
-                width: 100.0,
-                height: 100.0,
-                child: Transform.rotate(
-                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Container(height: 100, width: 100, color: Colors.blue),
+                Text('問題文'),
+
+                // 1つ目の県
+                Positioned(
+                  top: 100.0,
+                  left: 50.0 + positionedAnimation.value,
+                  width: Prefecture_width,
+                  height: Prefecture_hight,
+                  child: Transform.rotate(
+                    angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          imageWidgets[prefecture_list[0]].image_path,
+                          fit: BoxFit.cover,
+                        ),
+                        Text(imageWidgets[prefecture_list[0]].name),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
+                // 2つ目の県
+                Positioned(
+                  top: 250.0,
+                  left: 200.0 + positionedAnimation.value,
+                  width: Prefecture_width,
+                  height: Prefecture_hight,
+                  child: Transform.rotate(
+                    angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          imageWidgets[prefecture_list[1]].image_path,
+                          fit: BoxFit.cover,
+                        ),
+                        Text(imageWidgets[prefecture_list[1]].name),
+                      ],
+                    ),
+                  ),
+                ),
+                // 3つ目の県
+                Positioned(
+                  top: 500.0,
+                  left: 100.0 + positionedAnimation.value,
+                  width: Prefecture_width,
+                  height: Prefecture_hight,
+                  child: Transform.rotate(
+                    angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          imageWidgets[prefecture_list[2]].image_path,
+                          fit: BoxFit.cover,
+                        ),
+                        Text(imageWidgets[prefecture_list[2]].name),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: _circle_x!,
+                  top: _circle_y!,
+                  child: Icon(Icons.circle, size: 50.0),
+                ),
+              ],
+            );
+          },
+        ),
+      );
+    } else {
+      return MaterialApp(
+        home: Get(),
+      );
     }
   }
 }
