@@ -40,3 +40,9 @@ flutter:
     - assets/images/water.jpg
     - assets/images/seikai.png
     - assets/images/fuseikai.png
+
+    - assets/images/prefectures/fukuoka.png
+    - assets/images/prefectures/kagoshima.png
+    - assets/images/prefectures/kumamoto.png
+    - assets/images/prefectures/miyazaki.png
+    - assets/images/prefectures/nagasaki.png
