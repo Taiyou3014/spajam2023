@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'get.dart';
 import 'home.dart';
 import 'favorite.dart';
 import 'explore.dart';
+import 'kasokudo.dart';
 
 class MyApp extends StatelessWidget{
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: NavigationExample());
+    return  MaterialApp(home: Get());
   }
 }
 
