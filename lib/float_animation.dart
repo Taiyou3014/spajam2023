@@ -11,10 +11,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
-  late Tween<Alignment> alignmentTween; // <<< 1つ目のアニメーションのTween 横の動き
+  late Tween<double> positionedTween;
   late Tween<double> rotateTween; // <<< 2つ目のアニメーションのTween
-  late Animation<Alignment> alignmentAnimation; // <<< １つ目のアニメーション
   late Animation<double> rotateAnimation; // <<< 2つ目のアニメーション
+  late Animation<double> positionedAnimation;
 
   var x = 0;
   var y = 0;
@@ -30,12 +30,10 @@ class _MyHomePageState extends State<MyHomePage>
         controller.forward();
       }
     });
-    alignmentTween = Tween(
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight); // <<< 位置のアニメーションの始点と終点を定義
-    rotateTween = Tween(begin: 0, end: 8 * pi); // <<< 回転のアニメーションの始点と終点を定義
-    alignmentAnimation = controller.drive(alignmentTween); // <<< 位置のアニメーションを生成
+    rotateTween = Tween(begin: 0, end: 2 * pi); // <<< 回転のアニメーションの始点と終点を定義
+    positionedTween = Tween(begin: 0.0, end: 50.0);
     rotateAnimation = controller.drive(rotateTween); // <<< 回転のアニメーションを生成
+    positionedAnimation = controller.drive(positionedTween);
     super.initState();
     controller.forward();
   }
@@ -55,12 +53,19 @@ class _MyHomePageState extends State<MyHomePage>
       body: AnimatedBuilder(
         animation: controller,
         builder: (context, _) {
-          return Align(
-            alignment: alignmentAnimation.value, // <<< 位置のアニメーション変化を適用
-            child: Transform.rotate(
-              angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-              child: Text('Hello world!'),
-            ),
+          return Stack(
+            children: <Widget>[
+              Positioned(
+                top: 50.0,
+                left: 50.0 + positionedAnimation.value,
+                width: 100.0,
+                height: 100.0,
+                child: Transform.rotate(
+                  angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
+                  child: Container(height: 100, width: 100, color: Colors.blue),
+                ),
+              )
+            ],
           );
         },
       ),
