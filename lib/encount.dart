@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'prefecture.dart';
 
 class EncountWidget extends StatefulWidget {
   const EncountWidget({Key? key}) : super(key: key);
@@ -13,6 +14,18 @@ class _EncountWidgetState extends State<EncountWidget>
   late AnimationController controller;
   late Tween<double> rotateTween; // <<< 2つ目のアニメーションのTween
   late Animation<double> rotateAnimation; // <<< 2つ目のアニメーション
+
+  List<Prefecture> imageWidgets = [
+    Prefecture(image_path: 'assets/images/prefectures/fukuoka.png', name: '福岡'),
+    Prefecture(
+        image_path: 'assets/images/prefectures/kagoshima.png', name: '鹿児島'),
+    Prefecture(
+        image_path: 'assets/images/prefectures/kumamoto.png', name: '熊本'),
+    Prefecture(
+        image_path: 'assets/images/prefectures/miyazaki.png', name: '宮崎'),
+    Prefecture(
+        image_path: 'assets/images/prefectures/nagasaki.png', name: '長崎'),
+  ];
 
   @override
   void initState() {
@@ -39,6 +52,27 @@ class _EncountWidgetState extends State<EncountWidget>
 
   @override
   Widget build(BuildContext context) {
+    return encount(
+        controller: controller,
+        rotateAnimation: rotateAnimation,
+        imageWidgets: imageWidgets);
+  }
+}
+
+class encount extends StatelessWidget {
+  const encount({
+    super.key,
+    required this.controller,
+    required this.rotateAnimation,
+    required this.imageWidgets,
+  });
+
+  final AnimationController controller;
+  final Animation<double> rotateAnimation;
+  final List<Prefecture> imageWidgets;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter app'),
@@ -58,14 +92,24 @@ class _EncountWidgetState extends State<EncountWidget>
                   child: Container(height: 100, width: 100, color: Colors.blue),
                 ),
               ),
+              // 1つ目の県
               Positioned(
-                top: 200.0,
-                left: 200.0,
-                width: 100.0,
-                height: 100.0,
+                top: 100.0,
+                left: 50.0 + positionedAnimation.value,
+                width: Prefecture_width,
+                height: Prefecture_hight,
                 child: Transform.rotate(
                   angle: rotateAnimation.value, // <<< 回転のアニメーション変化を適用
-                  child: Container(height: 100, width: 100, color: Colors.blue),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        imageWidgets[prefecture_list[0]].image_path,
+                        fit: BoxFit.cover,
+                      ),
+                      Text(imageWidgets[prefecture_list[0]].name),
+                    ],
+                  ),
                 ),
               ),
             ],
