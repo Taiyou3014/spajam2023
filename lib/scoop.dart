@@ -35,6 +35,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double? _circle_x, _circle_y;
   static String ans = '';
 
+  bool vflg = true;
+
   bool hit = false;
   var encount_num = 0;
 
@@ -49,10 +51,6 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     Prefecture(
         image_path: 'assets/images/prefectures/nagasaki.png', name: '長崎'),
   ];
-
-  void vib() {
-    Vibration.vibrate();
-  }
 
   @override
   void initState() {
@@ -285,8 +283,12 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
         ),
       );
     } else {
-      vib();
+      if (vflg == true) {
+        Vibration.vibrate(duration: 500);
+        vflg = false;
+      }
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Get(
             path: imageWidgets[prefecture_list[encount_num]].image_path,
             name: imageWidgets[prefecture_list[encount_num]].name,

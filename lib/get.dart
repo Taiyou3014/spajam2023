@@ -37,10 +37,6 @@ class _GetState extends State<Get> with SingleTickerProviderStateMixin {
         MaterialPageRoute(builder: (context) => MoneyAnimation(flag: flag)));
   }
 
-  void vib() {
-    Vibration.vibrate();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -79,6 +75,7 @@ class _GetState extends State<Get> with SingleTickerProviderStateMixin {
     });
   }
 
+  bool vflg = true;
   bool a = false;
   Widget ifWidget(_size) {
     // if (before_y < 0 && before_y > -100) {
@@ -88,7 +85,10 @@ class _GetState extends State<Get> with SingleTickerProviderStateMixin {
     //_navigateToOtherScreen();
     if (a) {
       //return MaterialApp(home: MoneyAnimation(flag: flag));
-      vib();
+      if (vflg == true) {
+        Vibration.vibrate(duration: 2000);
+        vflg = false;
+      }
       return Container(
         color: Colors.teal[200],
         child: Stack(
