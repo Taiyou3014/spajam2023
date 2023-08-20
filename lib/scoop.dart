@@ -119,22 +119,22 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     _deviceWidth = MediaQuery.of(context).size.width;
     _circle_x = MediaQuery.of(context).size.width / 2 + x + 25;
     _circle_y = MediaQuery.of(context).size.height / 2 - y + 25;
-    if (_circle_y! > 155 &&
-        _circle_y! < 195 &&
-        _circle_x! > 130 &&
-        _circle_x! < 170) {
+    if (_circle_y! > 555 &&
+        _circle_y! < 595 &&
+        _circle_x! > 105 &&
+        _circle_x! < 145) {
       hit = true;
       encount_num = 0;
-    } else if (_circle_y! > 305 &&
-        _circle_y! < 345 &&
-        _circle_x! > 255 &&
-        _circle_x! < 295) {
+    } else if (_circle_y! > 505 &&
+        _circle_y! < 545 &&
+        _circle_x! > 305 &&
+        _circle_x! < 345) {
       hit = true;
       encount_num = 1;
-    } else if (_circle_y! > 555 &&
-        _circle_y! < 595 &&
-        _circle_x! > 155 &&
-        _circle_x! < 195) {
+    } else if (_circle_y! > 355 &&
+        _circle_y! < 395 &&
+        _circle_x! > 105 &&
+        _circle_x! < 145) {
       hit = true;
       encount_num = 2;
     }
