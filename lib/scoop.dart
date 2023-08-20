@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/make_question.dart';
 import 'package:sensors/sensors.dart';
+import 'package:vibration/vibration.dart';
 import 'ans.dart';
 import 'dart:math';
 import 'prefecture.dart';
@@ -24,7 +25,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   final Prefecture_width = 150.0;
   final Prefecture_hight = 150.0;
 
-  var prefecture_list = _shuffle([0, 1, 2, 3, 4]);
+  var prefecture_list = _shuffle([0, 1, 2]);
   late Future<String> question;
 
   double x = 0;
@@ -32,6 +33,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double z = 0;
   double? _deviceWidth, _deviceHeight;
   double? _circle_x, _circle_y;
+  static String ans = '';
 
   bool hit = false;
   var encount_num = 0;
@@ -48,11 +50,16 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
         image_path: 'assets/images/prefectures/nagasaki.png', name: '長崎'),
   ];
 
+  void vib() {
+    Vibration.vibrate();
+  }
+
   @override
   void initState() {
     var num_ans = _shuffle([0, 1, 2])[0];
     super.initState();
     question = makeQuestion(imageWidgets[num_ans].name);
+    ans = imageWidgets[num_ans].name;
 
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
@@ -278,8 +285,12 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
         ),
       );
     } else {
+      vib();
       return MaterialApp(
-        home: Get(),
+        home: Get(
+            path: imageWidgets[prefecture_list[encount_num]].image_path,
+            name: imageWidgets[prefecture_list[encount_num]].name,
+            ans: ans),
       );
     }
   }
