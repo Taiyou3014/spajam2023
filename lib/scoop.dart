@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'hit.dart';
 import 'package:flutter_application_2/make_question.dart';
 import 'package:sensors/sensors.dart';
-import 'hit.dart';
+import 'ans.dart';
 import 'dart:math';
 import 'prefecture.dart';
 import 'get.dart';
@@ -24,7 +23,6 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
 
   final Prefecture_width = 150.0;
   final Prefecture_hight = 150.0;
-  static String ans = '';
 
   var prefecture_list = _shuffle([0, 1, 2, 3, 4]);
   late Future<String> question;
@@ -34,6 +32,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double z = 0;
   double? _deviceWidth, _deviceHeight;
   double? _circle_x, _circle_y;
+  static String ans = '';
 
   bool hit = false;
   var encount_num = 0;
@@ -270,22 +269,34 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                     ),
                   ),
                 ),
+                Positioned(
+                  left: _circle_x!,
+                  top: _circle_y!,
+                  child: Icon(Icons.circle, size: 50.0),
+                ),
               ],
             );
           },
         ),
       );
+    } else {
+      return MaterialApp(
+        home: Get(
+            path: imageWidgets[prefecture_list[encount_num]].image_path,
+            name: imageWidgets[prefecture_list[encount_num]].name,
+            ans: ans),
+      );
     }
   }
+}
 
-  List _shuffle(List items) {
-    var random = new Random();
-    for (var i = items.length - 1; i > 0; i--) {
-      var n = random.nextInt(i + 1);
-      var temp = items[i];
-      items[i] = items[n];
-      items[n] = temp;
-    }
-    return items;
+List _shuffle(List items) {
+  var random = new Random();
+  for (var i = items.length - 1; i > 0; i--) {
+    var n = random.nextInt(i + 1);
+    var temp = items[i];
+    items[i] = items[n];
+    items[n] = temp;
   }
+  return items;
 }
