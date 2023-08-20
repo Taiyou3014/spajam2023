@@ -4,18 +4,20 @@ import 'ans.dart';
 class Hit extends StatefulWidget {
   final String path; // 引数として受け取る
   final String name;
+  final String ans;
 
-  Hit({required this.path, required this.name});
+  Hit({required this.path, required this.name, required this.ans});
 
   @override
-  _Hit createState() => _Hit(path: path, name: name);
+  _Hit createState() => _Hit(path: path, name: name, ans: ans);
 }
 
 class _Hit extends State<Hit> {
   final String path;
   final String name;
+  final String ans;
 
-  _Hit({required this.path, required this.name});
+  _Hit({required this.path, required this.name, required this.ans});
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +49,18 @@ class _Hit extends State<Hit> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MoneyAnimation(flag: false)),
-                );
+                if (name == ans)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MoneyAnimation(flag: true)),
+                  );
+                if (name != ans)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MoneyAnimation(flag: false)),
+                  );
               },
               child: const Text("next"),
             ),

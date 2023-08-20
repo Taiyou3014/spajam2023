@@ -22,6 +22,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
 
   final Prefecture_width = 150.0;
   final Prefecture_hight = 150.0;
+  static String ans = '';
 
   var prefecture_list = _shuffle([0, 1, 2, 3, 4]);
   late Future<String> question;
@@ -43,6 +44,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     var num_ans = _shuffle([0, 1, 2])[0];
     super.initState();
     question = makeQuestion(imageWidgets[num_ans].name);
+    ans = imageWidgets[num_ans].name;
 
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
@@ -93,10 +95,11 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                     }
                     // テキストの位置とスタイルを変更
                     return Positioned(
-                      top: MediaQuery.of(context).size.height *0.1, // 画面の上部1/20の位置に配置
+                      top: MediaQuery.of(context).size.height *
+                          0.1, // 画面の上部1/20の位置に配置
                       left: 20.0, // テキストの左側の余白を20.0に設定
                       right: 20.0, // テキストの右側の余白を20.0に設定
-                      
+
                       child: Column(
                         children: [
                           // ここに新しく追加するテキスト
@@ -129,11 +132,12 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                       ),
                     );
                   } else {
-                    return Center(child: const CircularProgressIndicator()); // or another widget to show loading
+                    return Center(
+                        child:
+                            const CircularProgressIndicator()); // or another widget to show loading
                   }
                 },
               ),
-
 
               // 1つ目の県
               Positioned(
@@ -202,7 +206,8 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
                     MaterialPageRoute(
                         builder: (context) => Hit(
                             path: imageWidgets[prefecture_list[2]].image_path,
-                            name: imageWidgets[prefecture_list[2]].name)),
+                            name: imageWidgets[prefecture_list[2]].name,
+                            ans: ans)),
                   );
                 },
                 child: const Text("next"),
