@@ -32,6 +32,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
   double z = 0;
   double? _deviceWidth, _deviceHeight;
   double? _circle_x, _circle_y;
+  static String ans = '';
 
   bool hit = false;
   var encount_num = 0;
@@ -53,6 +54,7 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
     var num_ans = _shuffle([0, 1, 2])[0];
     super.initState();
     question = makeQuestion(imageWidgets[num_ans].name);
+    ans = imageWidgets[num_ans].name;
 
     controller =
         AnimationController(duration: Duration(seconds: 2), vsync: this);
@@ -279,7 +281,10 @@ class _ScoopState extends State<Scoop> with SingleTickerProviderStateMixin {
       );
     } else {
       return MaterialApp(
-        home: Get(),
+        home: Get(
+            path: imageWidgets[prefecture_list[encount_num]].image_path,
+            name: imageWidgets[prefecture_list[encount_num]].name,
+            ans: ans),
       );
     }
   }
